@@ -1,0 +1,68 @@
+name: Build and Deploy Index
+
+on:
+  repository_dispatch:
+    types: [prototype-deployed]
+  workflow_dispatch:   # Manual trigger for testing / initial setup
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: build-index
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout index repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Discover prototypes
+        id: discover
+        run: |
+          # Clone the gh-pages branch of the prototype repo to scan deployed prototypes
+          git clone --depth 1 --branch gh-pages \
+            https://github.com/karimlo/prototype.git proto-pages 2>/dev/null || true
+
+          PROTOTYPES=""
+          if [ -d "proto-pages" ]; then
+            for dir in proto-pages/*/; do
+              [ -d "$dir" ] || continue
+              name=$(basename "$dir")
+              # Skip hidden directories
+              case "$name" in .*) continue ;; esac
+              PROTOTYPES="$PROTOTYPES $name"
+            done
+          fi
+          echo "Found prototypes:$PROTOTYPES"
+          echo "prototypes=$PROTOTYPES" >> "$GITHUB_OUTPUT"
+
+      - name: Generate index page
+        run: |
+          mkdir -p dist
+          node scripts/generate-index.cjs dist/index.html ${{ steps.discover.outputs.prototypes }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
