@@ -23,7 +23,7 @@ const ABOUT_ME_URL = 'https://karimlounes.atlassian.net/wiki/spaces/SD/pages/786
 // Icon mapping for known prototypes
 const iconMap = {
   'main': 'ðŸŽ¨',
-  'test-prototype-1': 'ð§ª',
+  'test-prototype-1': 'ï¿½',
 };
 
 // Description mapping for known prototypes
@@ -282,7 +282,7 @@ const html = `<!DOCTYPE html>
       <ul class="nav-links">
         <li><a href="/" class="nav-link">Prototypes</a></li>
         <li><a href="${DOCUMENTATION_URL}" target="_blank" rel="noopener noreferrer" class="nav-link">Documentation <span class="external-icon" aria-hidden="true">&#8599;</span></a></li>
-        <li><a href="${ABOUTME_URL}" target="_blank" rel="noopener noreferrer" class="nav-link">About Me <span class="external-icon" aria-hidden="true">&#8599;</span></a></li>
+        <li><a href="${ABOUT_ME_URL}" target="_blank" rel="noopener noreferrer" class="nav-link">About Me <span class="external-icon" aria-hidden="true">&#8599;</span></a></li>
       </ul>
     </div>
   </nav>
