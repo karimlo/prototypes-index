@@ -274,7 +274,7 @@ const html = `<!DOCTYPE html>
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="/" class="nav-brand">My UX AI</a>
-      <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.getElementById('navbar').classList.toggle('menu-open')">
+      <button class="nav-toggle" aria-label="Toggle navigation">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -282,7 +282,7 @@ const html = `<!DOCTYPE html>
       <ul class="nav-links">
         <li><a href="/" class="nav-link">Prototypes</a></li>
         <li><a href="${DOCUMENTATION_URL}" target="_blank" rel="noopener noreferrer" class="nav-link">Documentation <span class="external-icon" aria-hidden="true">&#8599;</span></a></li>
-        <li><a href="${ABOUT_ME_URL}" target="_blank" rel="noopener noreferrer" class="nav-link">About Me <span class="external-icon" aria-hidden="true">&#8599;</span></a></li>
+        <li><a href="${ABOUTME_URL}" target="_blank" rel="noopener noreferrer" class="nav-link">About Me <span class="external-icon" aria-hidden="true">&#8599;</span></a></li>
       </ul>
     </div>
   </nav>
