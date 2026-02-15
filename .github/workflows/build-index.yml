@@ -53,6 +53,7 @@ jobs:
         run: |
           mkdir -p dist
           node scripts/generate-index.cjs dist/index.html ${{ steps.discover.outputs.prototypes }}
+          echo "myuxai.com" > dist/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
